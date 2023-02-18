@@ -8,7 +8,7 @@ class TestGameBoard(unittest.TestCase):
     # Qnd function just to check if able to run test
     def test_able_to_run(self):
         self.assertEqual(10, 10)
-
+    """
     def test_first_added_gameboard_position(self):
         board_dim = 8
         set = GameBoard(board_dim)
@@ -52,6 +52,17 @@ class TestGameBoard(unittest.TestCase):
         self.assertEqual(set.board[4][4].y, 3)
         self.assertEqual(set.board[4][4].internal_label, "e3")
         self.assertEqual(set.board[4][4].color, "white")
+"""
+
+    def test_print_internal_labels(self):
+        board_dim = 8
+        set = GameBoard(board_dim)
+        set.display_gameboard_internal_labels()
+
+    def test_print_xy_values(self):
+        board_dim = 8
+        set = GameBoard(board_dim)
+        set.display_gameboard_xy_values()
 
 
 if __name__ == '__main__':

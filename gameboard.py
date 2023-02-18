@@ -9,19 +9,29 @@ class GameBoard:
         for i in range(dimensions - 1, -1, -1):
             temp = []
             start_letter = 'a'
-            for j in range(dimensions - 1, -1, -1):
+            for j in range(0, dimensions):
                 current_label = "{}{}".format(start_letter, i)
-                print("the current x is {} and y is {}".format(j, i))
+                # print("the current x is {} and y is {}".format(j, i))
                 temp.append(BoardSquare(j, i, current_label))
                 start_letter = chr(ord(start_letter) + 1)
             mainboard.append(temp)
-            print("New Row!")
+            # print("New Row!")
         return mainboard
 
     # iterate through gameboard and print out internal labels
-    def display_gameboard(self):
-        pass
-        # class representing each square on gameboard
+    def display_gameboard_internal_labels(self):
+        # this solo print because not alignted in test case termianl
+        print("")
+        for row in self.board:
+            for element in row:
+                print("{} ".format(element.internal_label), end="")
+            print("")
+
+    def display_gameboard_xy_values(self):
+        for row in self.board:
+            for element in row:
+                print("({},{}) ".format(element.x, element.y), end="")
+            print("")
 
 
 class BoardSquare:
@@ -30,7 +40,7 @@ class BoardSquare:
         self.y = y_pos
         self.color = color
         self.internal_label = label
-        # external label will be what square displays at its position
+        # external label will be what square displays at its position (ie chess piece)
         self.external_label = ""
 
     def get_x_position(self):
