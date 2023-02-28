@@ -39,11 +39,17 @@ class GameBoard:
             print("")
 
     def print_sample_board(self):
+        # loop to iterate through each row of gameboard and print height in algebraic notation
         for i in range(self.game_dimension):
             print(str(self.board[i][0].get_y_position()), end="  ")
             for j in range(self.game_dimension):
-                print(str(self.board[i][j].get_external_label()), end=" ")
+                if self.board[i][j].get_piece_on_spot() == None:
+                    print(self.board[i][j].get_external_label(), end=" ")
+                else:
+                    print(
+                        self.board[i][j].get_piece_on_spot().get_label(), end=" ")
             print(" " + str(self.board[i][0].get_y_position()))
+        # loop to print letters at bottom of screen
         current_letter = 'a'
         for iter in range(self.game_dimension):
             if iter == 0:
@@ -53,6 +59,52 @@ class GameBoard:
             print("{}".format(current_letter), end=" ")
             current_letter = chr(ord(current_letter) + 1)
         print("")
+    """
+    def print_board_with_chess_pieces(self):
+        pass
+    """
+    # function to set correct pieces in top/bottom 2 rows so can start game
+
+    def set_start_chess_board(self):
+        # set top row
+        self.board[0][0].set_piece_on_spot(Rook("Black"))
+        self.board[0][1].set_piece_on_spot(Knight("Black"))
+        self.board[0][2].set_piece_on_spot(Bishop("Black"))
+        self.board[0][3].set_piece_on_spot(Queen("Black"))
+        self.board[0][4].set_piece_on_spot(King("Black"))
+        self.board[0][5].set_piece_on_spot(Bishop("Black"))
+        self.board[0][6].set_piece_on_spot(Knight("Black"))
+        self.board[0][7].set_piece_on_spot(Rook("Black"))
+
+        # set bottom row
+        self.board[7][0].set_piece_on_spot(Rook("White"))
+        self.board[7][1].set_piece_on_spot(Knight("White"))
+        self.board[7][2].set_piece_on_spot(Bishop("White"))
+        self.board[7][3].set_piece_on_spot(Queen("White"))
+        self.board[7][4].set_piece_on_spot(King("White"))
+        self.board[7][5].set_piece_on_spot(Bishop("White"))
+        self.board[7][6].set_piece_on_spot(Knight("White"))
+        self.board[7][7].set_piece_on_spot(Rook("White"))
+
+        # set black pawns
+        self.board[1][0].set_piece_on_spot(Pawn("Black"))
+        self.board[1][1].set_piece_on_spot(Pawn("Black"))
+        self.board[1][2].set_piece_on_spot(Pawn("Black"))
+        self.board[1][3].set_piece_on_spot(Pawn("Black"))
+        self.board[1][4].set_piece_on_spot(Pawn("Black"))
+        self.board[1][5].set_piece_on_spot(Pawn("Black"))
+        self.board[1][6].set_piece_on_spot(Pawn("Black"))
+        self.board[1][7].set_piece_on_spot(Pawn("Black"))
+
+        # set white pawns
+        self.board[6][0].set_piece_on_spot(Pawn("White"))
+        self.board[6][1].set_piece_on_spot(Pawn("White"))
+        self.board[6][2].set_piece_on_spot(Pawn("White"))
+        self.board[6][3].set_piece_on_spot(Pawn("White"))
+        self.board[6][4].set_piece_on_spot(Pawn("White"))
+        self.board[6][5].set_piece_on_spot(Pawn("White"))
+        self.board[6][6].set_piece_on_spot(Pawn("White"))
+        self.board[6][7].set_piece_on_spot(Pawn("White"))
 
 
 class BoardSquare:
@@ -82,6 +134,9 @@ class BoardSquare:
     def get_external_label(self):
         return self.external_label
 
+    def get_piece_on_spot(self):
+        return self.piece_on_spot
+
     def print_xy_coord(self):
         return ("{},{}".format(self.x, self.y))
 
@@ -92,17 +147,3 @@ class BoardSquare:
         piece.set_x_value(self.get_x_position())
         # print(piece.get_x_position())
         # print(piece.get_y_position())
-
-    # function to set correct pieces in top/bottom 2 rows so can start game
-    def set_start_chess_board(self):
-        # set top row
-        self.board[0][0].set_piece_on_spot(Rook("Black"))
-        self.board[0][1].set_piece_on_spot(Knight("Black"))
-        self.board[0][2].set_piece_on_spot(Bishop("Black"))
-        self.board[0][3].set_piece_on_spot(Queen("Black"))
-        self.board[0][4].set_piece_on_spot(King("Black"))
-        self.board[0][5].set_piece_on_spot(Bishop("Black"))
-        self.board[0][6].set_piece_on_spot(Knight("Black"))
-        self.board[0][7].set_piece_on_spot(Rook("Black"))
-
-        # set bottom row

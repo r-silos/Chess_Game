@@ -14,6 +14,9 @@ class Gamepiece:
     def set_x_value(self, x_pos):
         self.x_value = x_pos
 
+    def get_label(self):
+        return self.display
+
 
 class Pawn(Gamepiece):
     def __init__(self, color):
@@ -47,5 +50,5 @@ class Rook(Gamepiece):
 
 class Knight(Gamepiece):
     def __init__(self, color):
-        self.display = "K"
+        self.display = "H"
         self.piece_color = color
