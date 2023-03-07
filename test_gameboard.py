@@ -1,5 +1,6 @@
 import unittest
 from gameboard import GameBoard, BoardSquare
+from main import gameboard_creator
 # unit test video: https://www.youtube.com/watch?time_continue=763&v=6tNS--WetLI&embeds_euri=https%3A%2F%2Fwww.google.com%2Fsearch%3Fq%3Drun%2Bunit%2Btests%2Bpython%26rlz%3D1C1ONGR_enUS976US976%26sxsrf%3DAJOqlzUWca9VYEDJSSuw8Gkgw8CYLJma6w%3A16766630&feature=emb_logo
 
 
@@ -102,6 +103,14 @@ class TestGameBoard(unittest.TestCase):
         board_dim = 3
         set = GameBoard(board_dim)
         set.print_sample_board()
+
+    # test to see if list with positions is working, try to automate testing with for loop!
+    def test_algebraic_position_dictionary(self):
+        current_gameboard = gameboard_creator(8)
+        current_gameboard.print_sample_board()
+        pos_list = current_gameboard.set_up_chess_dictionary()
+        for i in range(current_gameboard.game_dimension):
+            pass
 
 
 if __name__ == '__main__':

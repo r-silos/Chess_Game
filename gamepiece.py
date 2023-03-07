@@ -1,6 +1,7 @@
 class Gamepiece:
     def __init__(self):
         self.display = "T"
+        self.piece_color = "default color"
 
     def get_x_position(self):
         return self.x_value
@@ -18,7 +19,7 @@ class Gamepiece:
         return self.display
 
     def get_piece_color(self):
-        return self.get_piece_color
+        return self.piece_color
 
 
 class Pawn(Gamepiece):

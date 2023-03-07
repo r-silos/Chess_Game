@@ -1,12 +1,13 @@
 from gamepiece import Gamepiece, Rook, Knight, Bishop, Queen, King, Pawn
+from colorama import Fore, Style, Back
 
 
 class GameBoard:
     def __init__(self, game_dimension):
         self.board = GameBoard.make_gameboard(game_dimension)
         self.game_dimension = game_dimension
-    # function takes in a dimension i and returns an ixi 2d array
 
+    # function takes in a dimension i and returns an ixi 2d array
     def make_gameboard(dimensions):
         mainboard = []
         # making double change
@@ -47,12 +48,14 @@ class GameBoard:
                     print(self.board[i][j].get_external_label(), end=" ")
                 else:
                     if self.board[i][j].get_piece_on_spot().get_piece_color() == "Black":
-                        print("\033[31m{}}\033[0m".format(
-                            self.board[i][j].get_piece_on_spot().get_label()), end=" ")
-                        print("black spot spotted!")
+                        print(
+                            Fore.BLACK + Back.GREEN + self.board[i][j].get_piece_on_spot().get_label(), end=" ")
+                        print(Style.RESET_ALL, end="")
+                        # print("black spot spotted!")
                     else:
                         print(
-                            self.board[i][j].get_piece_on_spot().get_label(), end=" ")
+                            Fore.WHITE + Back.WHITE + self.board[i][j].get_piece_on_spot().get_label(), end=" ")
+                        print(Style.RESET_ALL, end="")
             print(" " + str(self.board[i][0].get_y_position()))
         # loop to print letters at bottom of screen
         current_letter = 'a'
@@ -64,10 +67,7 @@ class GameBoard:
             print("{}".format(current_letter), end=" ")
             current_letter = chr(ord(current_letter) + 1)
         print("")
-    """
-    def print_board_with_chess_pieces(self):
-        pass
-    """
+
     # function to set correct pieces in top/bottom 2 rows so can start game
 
     def set_start_chess_board(self):
@@ -111,6 +111,26 @@ class GameBoard:
         self.board[6][6].set_piece_on_spot(Pawn("White"))
         self.board[6][7].set_piece_on_spot(Pawn("White"))
 
+    # will allow to to create a dictionary of the positons refrenced by algebraic chess position (makes moving pieces considerably easier)
+    def set_up_chess_dictionary(self):
+        algebraic_pos_dict = {}
+        for i in range(self.game_dimension):
+            for j in range(self.game_dimension):
+                algebraic_pos_dict[self.board[i]
+                                   [j].get_internal_label()] = self.board[i][j]
+
+                """
+                # if no piece on spot, then dic value will hold tuple with x/y coord
+                if self.board[i][j].get_piece_on_spot() == None:
+                    algebraic_pos_dict[self.board[i][j].get_internal_label(
+                    )] = self.board[i][j].get_xy_coord()
+                # if there is a piece on spot, then will have gamepiece on dic value
+                else:
+                    algebraic_pos_dict[self.board[i][j].get_internal_label(
+                    )] = self.board[i][j].get_piece_on_spot()
+                """
+        return algebraic_pos_dict
+
 
 class BoardSquare:
     def __init__(self, x_pos, y_pos, label, color="white"):
@@ -123,6 +143,7 @@ class BoardSquare:
         self.external_label = "x"
         # this is where we hold chess piece object
         self.piece_on_spot = None
+        self.xy_coord = (x_pos, y_pos)
 
     def get_x_position(self):
         return self.x
@@ -142,13 +163,13 @@ class BoardSquare:
     def get_piece_on_spot(self):
         return self.piece_on_spot
 
+    def get_xy_coord(self):
+        return self.xy_coord
+
     def print_xy_coord(self):
         return ("{},{}".format(self.x, self.y))
 
     def set_piece_on_spot(self, piece):
         self.piece_on_spot = piece
-        # set piece x/y values to x/y values of spot
         piece.set_y_value(self.get_y_position())
         piece.set_x_value(self.get_x_position())
-        # print(piece.get_x_position())
-        # print(piece.get_y_position())
