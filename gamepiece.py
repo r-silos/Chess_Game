@@ -17,6 +17,9 @@ class Gamepiece:
     def get_label(self):
         return self.display
 
+    def get_piece_color(self):
+        return self.get_piece_color
+
 
 class Pawn(Gamepiece):
     def __init__(self, color):

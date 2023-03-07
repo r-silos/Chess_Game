@@ -5,8 +5,8 @@ class GameBoard:
     def __init__(self, game_dimension):
         self.board = GameBoard.make_gameboard(game_dimension)
         self.game_dimension = game_dimension
-
     # function takes in a dimension i and returns an ixi 2d array
+
     def make_gameboard(dimensions):
         mainboard = []
         # making double change
@@ -46,8 +46,13 @@ class GameBoard:
                 if self.board[i][j].get_piece_on_spot() == None:
                     print(self.board[i][j].get_external_label(), end=" ")
                 else:
-                    print(
-                        self.board[i][j].get_piece_on_spot().get_label(), end=" ")
+                    if self.board[i][j].get_piece_on_spot().get_piece_color() == "Black":
+                        print("\033[31m{}}\033[0m".format(
+                            self.board[i][j].get_piece_on_spot().get_label()), end=" ")
+                        print("black spot spotted!")
+                    else:
+                        print(
+                            self.board[i][j].get_piece_on_spot().get_label(), end=" ")
             print(" " + str(self.board[i][0].get_y_position()))
         # loop to print letters at bottom of screen
         current_letter = 'a'
