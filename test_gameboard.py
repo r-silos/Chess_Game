@@ -1,5 +1,6 @@
 import unittest
 from gameboard import GameBoard, BoardSquare
+from gamepiece import Rook, Knight, Pawn, Queen, King, Bishop
 from main import gameboard_creator
 # unit test video: https://www.youtube.com/watch?time_continue=763&v=6tNS--WetLI&embeds_euri=https%3A%2F%2Fwww.google.com%2Fsearch%3Fq%3Drun%2Bunit%2Btests%2Bpython%26rlz%3D1C1ONGR_enUS976US976%26sxsrf%3DAJOqlzUWca9VYEDJSSuw8Gkgw8CYLJma6w%3A16766630&feature=emb_logo
 
@@ -105,12 +106,100 @@ class TestGameBoard(unittest.TestCase):
         set.print_sample_board()
 
     # test to see if list with positions is working, try to automate testing with for loop!
-    def test_algebraic_position_dictionary(self):
+    def test_algebraic_start_pieces_dictionary(self):
         current_gameboard = gameboard_creator(8)
-        current_gameboard.print_sample_board()
         pos_list = current_gameboard.set_up_chess_dictionary()
+
+        # test top row of dictionary
+        self.assertIsInstance(
+            pos_list["a7"].get_piece_on_spot(), Rook)
+        self.assertEqual(
+            True, pos_list["a7"].get_piece_on_spot().color_checker("Black"))
+        self.assertIsInstance(
+            pos_list["b7"].get_piece_on_spot(), Knight)
+        self.assertEqual(
+            True, pos_list["b7"].get_piece_on_spot().color_checker("Black"))
+        self.assertIsInstance(
+            pos_list["c7"].get_piece_on_spot(), Bishop)
+        self.assertEqual(
+            True, pos_list["c7"].get_piece_on_spot().color_checker("Black"))
+        self.assertIsInstance(
+            pos_list["d7"].get_piece_on_spot(), Queen)
+        self.assertEqual(
+            True, pos_list["d7"].get_piece_on_spot().color_checker("Black"))
+        self.assertIsInstance(
+            pos_list["e7"].get_piece_on_spot(), King)
+        self.assertEqual(
+            True, pos_list["e7"].get_piece_on_spot().color_checker("Black"))
+        self.assertIsInstance(
+            pos_list["f7"].get_piece_on_spot(), Bishop)
+        self.assertEqual(
+            True, pos_list["f7"].get_piece_on_spot().color_checker("Black"))
+        self.assertIsInstance(
+            pos_list["g7"].get_piece_on_spot(), Knight)
+        self.assertEqual(
+            True, pos_list["g7"].get_piece_on_spot().color_checker("Black"))
+        self.assertIsInstance(
+            pos_list["h7"].get_piece_on_spot(), Rook)
+        self.assertEqual(
+            True, pos_list["h7"].get_piece_on_spot().color_checker("Black"))
+
+        # test bottom row of dictionary
+        self.assertIsInstance(
+            pos_list["a0"].get_piece_on_spot(), Rook)
+        self.assertEqual(
+            True, pos_list["a0"].get_piece_on_spot().color_checker("White"))
+        self.assertIsInstance(
+            pos_list["b0"].get_piece_on_spot(), Knight)
+        self.assertEqual(
+            True, pos_list["b0"].get_piece_on_spot().color_checker("White"))
+        self.assertIsInstance(
+            pos_list["c0"].get_piece_on_spot(), Bishop)
+        self.assertEqual(
+            True, pos_list["c0"].get_piece_on_spot().color_checker("White"))
+        self.assertIsInstance(
+            pos_list["d0"].get_piece_on_spot(), Queen)
+        self.assertEqual(
+            True, pos_list["d0"].get_piece_on_spot().color_checker("White"))
+        self.assertIsInstance(
+            pos_list["e0"].get_piece_on_spot(), King)
+        self.assertEqual(
+            True, pos_list["e0"].get_piece_on_spot().color_checker("White"))
+        self.assertIsInstance(
+            pos_list["f0"].get_piece_on_spot(), Bishop)
+        self.assertEqual(
+            True, pos_list["f0"].get_piece_on_spot().color_checker("White"))
+        self.assertIsInstance(
+            pos_list["g0"].get_piece_on_spot(), Knight)
+        self.assertEqual(
+            True, pos_list["g0"].get_piece_on_spot().color_checker("White"))
+        self.assertIsInstance(
+            pos_list["h0"].get_piece_on_spot(), Rook)
+        self.assertEqual(
+            True, pos_list["h0"].get_piece_on_spot().color_checker("White"))
+
+        # test row of black pawns
         for i in range(current_gameboard.game_dimension):
-            pass
+            self.assertIsInstance(pos_list["{}6".format(
+                chr(ord("a") + i))].get_piece_on_spot(), Pawn)
+            self.assertEqual(True, pos_list["{}6".format(
+                chr(ord("a") + i))].get_piece_on_spot().color_checker("Black"))
+
+        # test row of white pawns
+        for i in range(current_gameboard.game_dimension):
+            self.assertIsInstance(pos_list["{}1".format(
+                chr(ord("a") + i))].get_piece_on_spot(), Pawn)
+            self.assertEqual(True, pos_list["{}1".format(
+                chr(ord("a") + i))].get_piece_on_spot().color_checker("White"))
+
+    # makes sure in the position dictionary, the algrbeiac spaces holding refefrence to spots w/o pieces are correctly blank
+    def test_algebraic_non_piece_places(self):
+        current_gameboard = gameboard_creator(8)
+        pos_list = current_gameboard.set_up_chess_dictionary()
+        for i in range(2, 6):
+            for j in range(current_gameboard.game_dimension):
+                self.assertEqual(pos_list["{}{}".format(
+                    chr(ord("a") + j), i)].get_piece_on_spot(), None)
 
 
 if __name__ == '__main__':

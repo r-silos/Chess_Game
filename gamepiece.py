@@ -21,6 +21,9 @@ class Gamepiece:
     def get_piece_color(self):
         return self.piece_color
 
+    def color_checker(self, comp_color):
+        return True if comp_color == self.piece_color else False
+
 
 class Pawn(Gamepiece):
     def __init__(self, color):
