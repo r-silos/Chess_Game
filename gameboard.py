@@ -6,6 +6,7 @@ class GameBoard:
     def __init__(self, game_dimension):
         self.board = GameBoard.make_gameboard(game_dimension)
         self.game_dimension = game_dimension
+        self.algebra_dict = self.set_up_chess_dictionary()
 
     # function takes in a dimension i and returns an ixi 2d array
     def make_gameboard(dimensions):
@@ -51,7 +52,6 @@ class GameBoard:
                         print(
                             Fore.BLACK + Back.GREEN + self.board[i][j].get_piece_on_spot().get_label(), end=" ")
                         print(Style.RESET_ALL, end="")
-                        # print("black spot spotted!")
                     else:
                         print(
                             Fore.WHITE + Back.WHITE + self.board[i][j].get_piece_on_spot().get_label(), end=" ")
@@ -130,6 +130,25 @@ class GameBoard:
                     )] = self.board[i][j].get_piece_on_spot()
                 """
         return algebraic_pos_dict
+
+    def get_algebraic_dictionary(self):
+        return self.algebra_dict
+
+    def get_spot_from_algebraic_dictionary(self, al_position):
+        return self.algebra_dict[al_position]
+
+    def get_piece_from_algebraic_dictionary(self, al_position):
+        return self.algebra_dict[al_position].get_piece_on_spot()
+
+    def get_piece_color_from_algebraic_dictionry(self, al_position, color):
+        return self.algebra_dict[al_position].get_piece_on_spot().color_checker(color)
+
+
+class ChessGame(GameBoard):
+    def __init__(self):
+        # ChessGame class will just initialize the Gameboard class which is 8x8 dims
+        super().__init__(8)
+        self.set_start_chess_board()
 
 
 class BoardSquare:
