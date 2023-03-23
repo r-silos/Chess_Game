@@ -140,13 +140,13 @@ class GameBoard:
     def get_piece_from_algebraic_dictionary(self, al_position):
         return self.algebra_dict[al_position].get_piece_on_spot()
 
-    def get_piece_color_from_algebraic_dictionry(self, al_position, color):
+    def check_piece_color_from_dictionary(self, al_position, color):
         return self.algebra_dict[al_position].get_piece_on_spot().color_checker(color)
 
 
-class ChessGame(GameBoard):
+class ChessBoard(GameBoard):
     def __init__(self):
-        # ChessGame class will just initialize the Gameboard class which is 8x8 dims
+        # ChessBoard class will just initialize the Gameboard class in 8x8 dims
         super().__init__(8)
         self.set_start_chess_board()
 
