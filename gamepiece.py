@@ -35,6 +35,10 @@ class King(Gamepiece):
     def __init__(self, color):
         self.display = "K"
         self.piece_color = color
+        # this attribute used for castling
+        self.has_moved = False
+        # attribute to see if king under attack from opponeant piece as they determines what moves player has
+        self.is_under_attack = False
 
 
 class Bishop(Gamepiece):
@@ -53,6 +57,8 @@ class Rook(Gamepiece):
     def __init__(self, color):
         self.display = "R"
         self.piece_color = color
+        # this attribute used for castling
+        self.has_moved = False
 
 
 class Knight(Gamepiece):

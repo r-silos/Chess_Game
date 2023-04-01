@@ -1,7 +1,6 @@
 import unittest
 from gameboard import GameBoard, BoardSquare, ChessBoard
 from gamepiece import Rook, Knight, Pawn, Queen, King, Bishop
-from main import gameboard_creator
 # unit test video: https://www.youtube.com/watch?time_continue=763&v=6tNS--WetLI&embeds_euri=https%3A%2F%2Fwww.google.com%2Fsearch%3Fq%3Drun%2Bunit%2Btests%2Bpython%26rlz%3D1C1ONGR_enUS976US976%26sxsrf%3DAJOqlzUWca9VYEDJSSuw8Gkgw8CYLJma6w%3A16766630&feature=emb_logo
 
 
