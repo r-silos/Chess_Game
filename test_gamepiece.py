@@ -103,7 +103,7 @@ class TestGamePiece(unittest.TestCase):
         set = GameBoard(8)
         set.set_start_chess_board()
         print("")
-        set.print_sample_board()
+        set.print_board()
 
 
 if __name__ == '__main__':

@@ -24,6 +24,9 @@ class Gamepiece:
     def color_checker(self, comp_color):
         return True if comp_color == self.piece_color else False
 
+    # write function that validates move from start to end,
+    # and allows for each piece to input args to validate their respective motions
+
 
 class Pawn(Gamepiece):
     def __init__(self, color):

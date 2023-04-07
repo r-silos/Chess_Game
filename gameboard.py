@@ -40,7 +40,7 @@ class GameBoard:
                       element.get_y_position()), end="")
             print("")
 
-    def print_sample_board(self):
+    def print_board(self):
         # loop to iterate through each row of gameboard and print height in algebraic notation
         for i in range(self.game_dimension):
             print(str(self.board[i][0].get_y_position()), end="  ")
@@ -118,17 +118,6 @@ class GameBoard:
             for j in range(self.game_dimension):
                 algebraic_pos_dict[self.board[i]
                                    [j].get_internal_label()] = self.board[i][j]
-
-                """
-                # if no piece on spot, then dic value will hold tuple with x/y coord
-                if self.board[i][j].get_piece_on_spot() == None:
-                    algebraic_pos_dict[self.board[i][j].get_internal_label(
-                    )] = self.board[i][j].get_xy_coord()
-                # if there is a piece on spot, then will have gamepiece on dic value
-                else:
-                    algebraic_pos_dict[self.board[i][j].get_internal_label(
-                    )] = self.board[i][j].get_piece_on_spot()
-                """
         return algebraic_pos_dict
 
     def get_algebraic_dictionary(self):
@@ -142,6 +131,14 @@ class GameBoard:
 
     def check_piece_color_from_dictionary(self, al_position, color):
         return self.algebra_dict[al_position].get_piece_on_spot().color_checker(color)
+
+    def move_piece(self, original_position, final_position):
+        # this line will change the piece on final spot to have the piece on starting spot
+        self.get_spot_from_algebraic_dictionary(final_position).set_piece_on_spot(
+            self.get_piece_from_algebraic_dictionary(original_position))
+        # this line will get spot on original position and set it so piece on that spot is none (set_piece_on_spot called w/o args will set piece on spot as being none)
+        self.get_spot_from_algebraic_dictionary(
+            original_position).set_piece_on_spot()
 
 
 class ChessBoard(GameBoard):
@@ -188,7 +185,10 @@ class BoardSquare:
     def print_xy_coord(self):
         return ("{},{}".format(self.x, self.y))
 
-    def set_piece_on_spot(self, piece):
-        self.piece_on_spot = piece
-        piece.set_y_value(self.get_y_position())
-        piece.set_x_value(self.get_x_position())
+    def set_piece_on_spot(self, piece=None):
+        if piece == None:
+            self.piece_on_spot = None
+        else:
+            self.piece_on_spot = piece
+            piece.set_y_value(self.get_y_position())
+            piece.set_x_value(self.get_x_position())

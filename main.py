@@ -8,7 +8,7 @@ from chess_game import Chess_Game
 
 def main():
     game = Chess_Game("Jack", "John")
-    game.simple_move_piece()
+    game.user_input_move_pieces()
 
 
 main()

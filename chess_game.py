@@ -25,7 +25,7 @@ class Chess_Game:
         return self.black_player
 
     # function just test if able to move pieces, should not be in final version
-    def simple_move_piece(self):
+    def user_input_move_pieces(self):
         # .lower is method to dataclean as all algebraic postions are lowercase
         original_piece = input(
             "Type algebraic position of piece you want to move: ").lower()
@@ -37,5 +37,3 @@ class Chess_Game:
         while final_position not in self.chess_board.get_algebraic_dictionary().keys():
             final_position = input(
                 "That position does not exist! Please type in algebraic position of where you want to move chosen piece: ").lower()
-
-    # please type in code here to actually move the pieces!
